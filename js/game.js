@@ -15,15 +15,19 @@ $(document).ready(function() {
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		$(window).focus();
 	}
+	ctx.webkitImageSmoothingEnabled = false;
+	ctx.mozImageSmoothingEnabled = false;
+	ctx.imageSmoothingEnabled = false;
 
-	Game = new GameEngine();
+	Game = new GameEngine(600, 450);
 	Game.loader.load();
-	loop();
+	Game.loop();
 	Game.start();
 });
 
-
-function GameEngine() {
+function GameEngine(width, height) {
+	this.width = width;
+	this.height = height;
 	this.settings = new Settings();
 	this.ui = new UI();
 	this.loader = new AssetLoader();
@@ -54,7 +58,7 @@ GameEngine.prototype.start = function() {
 	this.level = new Level(this.currentLevel);
 	this.level.fadeIn();
 	this.player = new Player();
-	this.ui = new UI();
+
 	this.screen = new Screen();
 };
 GameEngine.prototype.end = function() {
@@ -103,9 +107,9 @@ GameEngine.prototype.render = function() {
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.save();
 
-	this.ui.draw();
-	renderLevel(this.level);
-	Game.screen.scroll();
+	this.level.render();
+	Game.screen.scroll()
+	this.player.render();;
 	this.entities.sort(sortByEntityLayer);
 	for (var i = 0; i < this.entities.length; i++) {
 		if (this.entities[i] !== null) {
@@ -114,11 +118,7 @@ GameEngine.prototype.render = function() {
 		}
 	}
 	this.particles.drawParticles();
-	this.player.render();
-
-
 	this.ui.draw();
-
 	//Clean up arrays
 	if (this.entities.length > 500) {
 		for (var i = 0; i < this.entities.length; i++) {

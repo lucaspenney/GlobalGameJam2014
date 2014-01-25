@@ -81,4 +81,5 @@ $('#canvas').mousemove(function(e) {
 //Mouse clicks hook
 $("#canvas").click(function(e) {
 	window.focus();
+	Game.player.click();
 });
