@@ -65,8 +65,7 @@ Player.prototype.click = function() {
 };
 
 Player.prototype.placeTower = function(id) {
-
+	if (this.selectedTile === null) return;
 	new Tower(this.selectedTile.x * 32, this.selectedTile.y * 32, id);
 	this.selectedTile = null;
-
 };

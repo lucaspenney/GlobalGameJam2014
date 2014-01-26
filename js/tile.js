@@ -6,7 +6,7 @@ function Tile(x, y, id) {
 	this.y = y;
 	this.id = id;
 	this.boundingBox = new BoundingBox(this.x, this.y, 32, 32);
-	if (this.id > 1) this.solid = true; //Specify which tile ID's should be solid here
+	if (this.id > 2) this.solid = true; //Specify which tile ID's should be solid here
 }
 
 Tile.prototype.setColor = function(color) {

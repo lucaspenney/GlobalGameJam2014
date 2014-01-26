@@ -28,6 +28,7 @@ function Tower(x, y, type) {
 	this.sprite.xOffset = (type) * 32;
 	this.sprite.frameWidth = 32;
 	this.sprite.frameHeight = 32;
+	new Wave();
 	Game.entities.push(this);
 }
 
